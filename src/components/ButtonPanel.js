@@ -12,13 +12,20 @@ const ButtonPanel = () => {
 
   const [groupIndices] = useState([1, 2, 3, 4]);
 
+  const [coloredCharacters] = useState(['÷', 'X', '-', '+', '=']);
+
   return (
-    <div>
+    <div className="button-panel">
       {buttons.map((group, outterIndex) => (
         <div className="btn-group" key={groupIndices[outterIndex]}>
-          {group.map(character => (
-            <Button key={character} name={character} />
-          ))}
+          {group.map(character => {
+            if (coloredCharacters.includes(character)) {
+              return <Button key={character} name={character} />;
+            } if (character === '0') {
+              return <Button key={character} name={character} color wide />;
+            }
+            return <Button key={character} name={character} color />;
+          })}
         </div>
       ))}
     </div>

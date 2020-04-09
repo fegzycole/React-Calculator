@@ -12,7 +12,7 @@ class App extends Component {
 
   render() {
     return (
-      <div id="calculator-container">
+      <div id="calculator-container" className="app">
         <Display />
         <ButtonPanel />
       </div>
