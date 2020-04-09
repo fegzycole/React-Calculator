@@ -10,11 +10,15 @@ const ButtonPanel = () => {
     ['0', '.', '='],
   ]);
 
+  const [groupIndices] = useState([1, 2, 3, 4]);
+
   return (
-    <div className="panel">
+    <div>
       {buttons.map((group, outterIndex) => (
-        <div className="btn-group" key={}>
-          {group.map}
+        <div className="btn-group" key={groupIndices[outterIndex]}>
+          {group.map(character => (
+            <Button key={character} name={character} />
+          ))}
         </div>
       ))}
     </div>
