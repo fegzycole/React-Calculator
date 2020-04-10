@@ -2,7 +2,8 @@
 import Big from 'big.js';
 
 const operate = (numberOne, numberTwo, operation) => {
-  let x, y;
+  let x;
+  let y;
 
   if (numberOne) {
     x = new Big(numberOne);

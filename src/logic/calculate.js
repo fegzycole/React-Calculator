@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import operate from './operate';
 
 const calculate = (calculator, buttonName) => {
@@ -17,16 +18,14 @@ const calculate = (calculator, buttonName) => {
   if (buttonName === '%') {
     if (next) {
       next = operate(null, next, buttonName);
-    } else {
-      if (!isNaN(total)) {
-        total = operate(total, null, buttonName);
-      }
+    } else if (!isNaN(total)) {
+      total = operate(total, null, buttonName);
     }
   }
 
   if (buttonName === '=') {
     if (total === 'NaN' && next && operation) {
-      return { total: 'NaN', next: null, operation: null }
+      return { total: 'NaN', next: null, operation: null };
     }
 
     if (next) {
@@ -38,7 +37,7 @@ const calculate = (calculator, buttonName) => {
 
   if (operations.includes(buttonName)) {
     if (total === 'NaN' && next && operation) {
-      return { total: 'NaN', next: null, operation: buttonName }
+      return { total: 'NaN', next: null, operation: buttonName };
     }
 
     if (total && next && operation) {
@@ -49,14 +48,14 @@ const calculate = (calculator, buttonName) => {
   }
 
   if (buttonName === '.') {
-    if (total && !total.split('').includes('.')) {
+    if (total && !isNaN(total) && !total.split('').includes('.')) {
       total = `${total}.`;
     }
     if (next && !next.split('').includes('.')) {
       next = `${next}.`;
     }
-    if (!next && operation) {
-      next = '0.'
+    if (!next && operation && total !== 'NaN') {
+      next = '0.';
     }
   }
 
