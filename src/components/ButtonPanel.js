@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Button from './Button';
 
-const ButtonPanel = () => {
+const ButtonPanel = ({ clickHandler }) => {
   const [buttons] = useState([
     ['AC', '+/-', '%', '÷'],
     ['7', '8', '9', 'X'],
@@ -10,9 +11,11 @@ const ButtonPanel = () => {
     ['0', '.', '='],
   ]);
 
-  const [groupIndices] = useState([1, 2, 3, 4]);
+  const [groupIndices] = useState([1, 2, 3, 4, 5]);
 
   const [coloredCharacters] = useState(['÷', 'X', '-', '+', '=']);
+
+  const handleClick = buttonName => clickHandler(buttonName);
 
   return (
     <div className="button-panel">
@@ -20,16 +23,42 @@ const ButtonPanel = () => {
         <div className="btn-group" key={groupIndices[outterIndex]}>
           {group.map(character => {
             if (coloredCharacters.includes(character)) {
-              return <Button key={character} name={character} />;
-            } if (character === '0') {
-              return <Button key={character} name={character} color wide />;
+              return (
+                <Button
+                  key={character}
+                  name={character}
+                  clickHandler={handleClick}
+                />
+              );
             }
-            return <Button key={character} name={character} color />;
+            if (character === '0') {
+              return (
+                <Button
+                  key={character}
+                  name={character}
+                  color
+                  wide
+                  clickHandler={handleClick}
+                />
+              );
+            }
+            return (
+              <Button
+                key={character}
+                name={character}
+                color
+                clickHandler={handleClick}
+              />
+            );
           })}
         </div>
       ))}
     </div>
   );
+};
+
+ButtonPanel.propTypes = {
+  clickHandler: PropTypes.func.isRequired,
 };
 
 export default ButtonPanel;
