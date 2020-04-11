@@ -10,7 +10,7 @@ const calculate = (calculator, buttonName) => {
     if (next) {
       next = (+next * -1).toString();
     }
-    if (total && total === 'NaN' && !next) {
+    if (total && total !== 'NaN' && !next) {
       total = (+total * -1).toString();
     }
   }
